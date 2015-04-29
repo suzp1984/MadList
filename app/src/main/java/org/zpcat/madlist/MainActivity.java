@@ -10,26 +10,31 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements ListView.OnItemClickListener {
     public static final String CATEGORY_SAMPLE_LIST = "org.zpcat.madlist.sample_code";
 
     private final String TAG = "tag";
 
-    private OverscrollListView mOverScrollLv;
-
-    private ArrayAdapter<CharSequence> mArrayNumbersAdapter;
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        mListView = new ListView(this);
+        setContentView(mListView);
 
-        findViewsById();
         initData();
     }
 
@@ -55,11 +60,18 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void findViewsById() {
-        mOverScrollLv = (OverscrollListView) findViewById(R.id.lv_container);
+    // ListView.OnItemClickListener
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Map<String, Object> map = (Map<String, Object>) mListView.getItemAtPosition(position);
+
+        Intent intent = (Intent) map.get("intent");
+        startActivity(intent);
     }
 
     private void initData() {
+        List<Map<String, Object>> intentData = new ArrayList<>();
+
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(CATEGORY_SAMPLE_LIST);
 
@@ -72,13 +84,21 @@ public class MainActivity extends ActionBarActivity {
             CharSequence labelSeq = info.loadLabel(pm);
             String label = labelSeq != null ? labelSeq.toString() :
                     info.activityInfo.name;
+            Intent intent = new Intent();
+            intent.setClassName(info.activityInfo.applicationInfo.packageName,
+                    info.activityInfo.name);
 
+            Map<String, Object> temp = new HashMap<>();
+            temp.put("title", label);
+            temp.put("intent", intent);
 
+            intentData.add(temp);
         }
 
-        mArrayNumbersAdapter = ArrayAdapter.createFromResource(this,
-                R.array.simple_nums, android.R.layout.simple_list_item_1);
+        mListView.setAdapter(new SimpleAdapter(this, intentData,
+                android.R.layout.simple_list_item_1, new String[] {"title"},
+                new int[] { android.R.id.text1 }));
 
-        mOverScrollLv.setAdapter(mArrayNumbersAdapter);
+        mListView.setOnItemClickListener(this);
     }
 }

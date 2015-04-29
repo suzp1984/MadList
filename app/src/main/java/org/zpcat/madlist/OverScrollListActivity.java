@@ -1,3 +1,7 @@
+/**
+ * Created by moses on 4/29/15.
+ */
+
 package org.zpcat.madlist;
 
 import org.zpcat.madlist.widget.OverscrollListView;
@@ -8,9 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
-/**
- * Created by moses on 4/29/15.
- */
 public class OverScrollListActivity extends Activity {
     private OverscrollListView mOverScrollLv;
 
