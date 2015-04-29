@@ -9,10 +9,10 @@
                 tools:context=".MainActivity">
 
 
-    <org.zpcat.madlist.OverscrollListView
+    <org.zpcat.madlist.widget.OverscrollListView
             android:id="@+id/lv_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-    </org.zpcat.madlist.OverscrollListView>
+    </org.zpcat.madlist.widget.OverscrollListView>
 </RelativeLayout>

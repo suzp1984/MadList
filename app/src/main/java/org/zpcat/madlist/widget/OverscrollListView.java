@@ -1,4 +1,4 @@
-package org.zpcat.madlist;
+package org.zpcat.madlist.widget;
 
 
 import android.content.Context;

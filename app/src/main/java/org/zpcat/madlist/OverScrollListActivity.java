@@ -2,24 +2,16 @@ package org.zpcat.madlist;
 
 import org.zpcat.madlist.widget.OverscrollListView;
 
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import java.util.List;
-
-public class MainActivity extends ActionBarActivity {
-    public static final String CATEGORY_SAMPLE_LIST = "org.zpcat.madlist.sample_code";
-
-    private final String TAG = "tag";
-
+/**
+ * Created by moses on 4/29/15.
+ */
+public class OverScrollListActivity extends Activity {
     private OverscrollListView mOverScrollLv;
 
     private ArrayAdapter<CharSequence> mArrayNumbersAdapter;
@@ -60,22 +52,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void initData() {
-        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-        mainIntent.addCategory(CATEGORY_SAMPLE_LIST);
-
-        PackageManager pm = getPackageManager();
-        List<ResolveInfo> plist = pm.queryIntentActivities(mainIntent, 0);
-
-        for (ResolveInfo info : plist) {
-            Log.e(TAG, info.activityInfo.toString());
-
-            CharSequence labelSeq = info.loadLabel(pm);
-            String label = labelSeq != null ? labelSeq.toString() :
-                    info.activityInfo.name;
-
-
-        }
-
         mArrayNumbersAdapter = ArrayAdapter.createFromResource(this,
                 R.array.simple_nums, android.R.layout.simple_list_item_1);
 
