@@ -16,15 +16,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".OverScrollListActivity"
-                  android:label="@string/over_scroll_list"
-                  >
+        <activity
+            android:name=".OverScrollListActivity"
+            android:label="@string/over_scroll_list" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="org.zpcat.madlist.sample_code"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="org.zpcat.madlist.sample_code" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ReverseListActivity"
+            android:label="@string/title_activity_reverse_list" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="org.zpcat.madlist.sample_code" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
