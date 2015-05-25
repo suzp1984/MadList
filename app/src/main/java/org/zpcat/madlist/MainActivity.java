@@ -1,18 +1,15 @@
 package org.zpcat.madlist;
 
-import org.zpcat.madlist.widget.OverscrollListView;
-
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -20,9 +17,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
-public class MainActivity extends ActionBarActivity implements ListView.OnItemClickListener {
+public class MainActivity extends Activity implements ListView.OnItemClickListener {
     public static final String CATEGORY_SAMPLE_LIST = "org.zpcat.madlist.sample_code";
 
     private final String TAG = "tag";
