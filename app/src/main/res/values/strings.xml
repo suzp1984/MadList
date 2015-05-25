@@ -5,4 +5,5 @@
     <string name="action_settings">Settings</string>
     <string name="over_scroll_list">OverScrollListView</string>
     <string name="title_activity_reverse_list">ReverseList</string>
+    <string name="title_activity_gride_wave_scale">WaveScale</string>
 </resources>
