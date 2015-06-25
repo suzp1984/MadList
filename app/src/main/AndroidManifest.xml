@@ -43,6 +43,15 @@
                 <category android:name="org.zpcat.madlist.sample_code" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ItemTouchHelperDemoActivity"
+            android:label="@string/title_activity_item_touch_helper_demo" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="org.zpcat.madlist.sample_code" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
