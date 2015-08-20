@@ -1,38 +1,80 @@
 package org.zpcat.madlist;
 
+import org.zpcat.madlist.adapter.PackageInfoRecyclerAdapter;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements ListView.OnItemClickListener {
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class MainActivity extends AppCompatActivity {
     public static final String CATEGORY_SAMPLE_LIST = "org.zpcat.madlist.sample_code";
 
     private final String TAG = "tag";
 
-    private ListView mListView;
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
+
+    @Bind(R.id.list)
+    RecyclerView mRecyclerView;
+
+    private PackageInfoRecyclerAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mListView = new ListView(this);
-        setContentView(mListView);
+
+        setContentView(R.layout.activity_main);
+
+        ButterKnife.bind(this);
+
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
+
+            mToolbar.setTitle(R.string.app_name);
+            mToolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        }
+
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        mAdapter = new PackageInfoRecyclerAdapter();
+        mAdapter.setOnItemClickListener(new PackageInfoRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, ResolveInfo info) {
+                Intent intent = new Intent();
+                intent.setClassName(info.activityInfo.applicationInfo.packageName,
+                        info.activityInfo.name);
+
+                startActivity(intent);
+            }
+        });
 
         initData();
+
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        ButterKnife.unbind(this);
+
+        super.onDestroy();
     }
 
     @Override
@@ -57,28 +99,19 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
         return super.onOptionsItemSelected(item);
     }
 
-    // ListView.OnItemClickListener
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Map<String, Object> map = (Map<String, Object>) mListView.getItemAtPosition(position);
-
-        Intent intent = (Intent) map.get("intent");
-        startActivity(intent);
-    }
-
     private void initData() {
-        List<Map<String, Object>> intentData = new ArrayList<>();
-
-        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-        mainIntent.addCategory(CATEGORY_SAMPLE_LIST);
+        Intent queryIntent = new Intent(Intent.ACTION_MAIN, null);
+        queryIntent.addCategory(CATEGORY_SAMPLE_LIST);
 
         PackageManager pm = getPackageManager();
-        List<ResolveInfo> plist = pm.queryIntentActivities(mainIntent, 0);
+        List<ResolveInfo> plist = pm.queryIntentActivities(queryIntent, 0);
 
         for (ResolveInfo info : plist) {
             Log.e(TAG, info.activityInfo.toString());
 
-            CharSequence labelSeq = info.loadLabel(pm);
+            mAdapter.addPackageInfo(info);
+
+            /*CharSequence labelSeq = info.loadLabel(pm);
             String label = labelSeq != null ? labelSeq.toString() :
                     info.activityInfo.name;
             Intent intent = new Intent();
@@ -89,13 +122,7 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
             temp.put("title", label);
             temp.put("intent", intent);
 
-            intentData.add(temp);
+            intentData.add(temp);*/
         }
-
-        mListView.setAdapter(new SimpleAdapter(this, intentData,
-                android.R.layout.simple_list_item_1, new String[] {"title"},
-                new int[] { android.R.id.text1 }));
-
-        mListView.setOnItemClickListener(this);
     }
 }
