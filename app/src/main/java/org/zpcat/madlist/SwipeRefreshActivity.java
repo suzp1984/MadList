@@ -41,6 +41,10 @@ public class SwipeRefreshActivity extends AppCompatActivity {
                 refreshContent();
             }
         });
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
         mSimpleRecyclerAdapter = new SimpleRecyclerAdapter();
 
