@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +16,7 @@ import android.widget.ImageView;
 import java.util.List;
 
 
-public class GridWaveScaleActivity extends Activity {
+public class GridWaveScaleActivity extends AppCompatActivity {
 
     private List<ResolveInfo> mApps;
 

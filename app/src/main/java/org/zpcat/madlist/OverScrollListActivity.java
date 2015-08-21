@@ -8,11 +8,12 @@ import org.zpcat.madlist.widget.OverscrollListView;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
-public class OverScrollListActivity extends Activity {
+public class OverScrollListActivity extends AppCompatActivity {
     private OverscrollListView mOverScrollLv;
 
     private ArrayAdapter<CharSequence> mArrayNumbersAdapter;

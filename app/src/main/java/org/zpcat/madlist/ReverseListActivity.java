@@ -1,13 +1,16 @@
 package org.zpcat.madlist;
 
-import android.app.ListActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
-public class ReverseListActivity extends ListActivity {
+public class ReverseListActivity extends AppCompatActivity {
 
     private String[] mStrings = {
             "Bordeaux",
@@ -19,13 +22,24 @@ public class ReverseListActivity extends ListActivity {
             "Strasbourg"
     };
 
+    @Bind(R.id.list)
+    ListView mListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reverse_list);
 
-        setListAdapter(new ArrayAdapter<String>(this,
+        ButterKnife.bind(this);
+
+        mListView.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, mStrings));
+    }
+
+    @Override
+    protected void onDestroy() {
+        ButterKnife.unbind(this);
+        super.onDestroy();
     }
 
     @Override

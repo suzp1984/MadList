@@ -12,7 +12,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ItemTouchHelperDemoActivity extends Activity implements
+public class ItemTouchHelperDemoActivity extends AppCompatActivity implements
         RecyclerListAdapter.OnStartDragListener {
 
     private RecyclerView recyclerView;
