@@ -9,4 +9,5 @@
     <string name="title_activity_item_touch_helper_demo">ItemTouchHelperDemoActivity</string>
     <string name="title_activity_recycler_multi_view_holder">RecyclerMultiViewHolderActivity
     </string>
+    <string name="title_activity_swipe_refresh">SwipeRefreshActivity</string>
 </resources>
