@@ -7,4 +7,6 @@
     <string name="title_activity_reverse_list">ReverseList</string>
     <string name="title_activity_gride_wave_scale">WaveScale</string>
     <string name="title_activity_item_touch_helper_demo">ItemTouchHelperDemoActivity</string>
+    <string name="title_activity_recycler_multi_view_holder">RecyclerMultiViewHolderActivity
+    </string>
 </resources>
