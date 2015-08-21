@@ -70,6 +70,10 @@
                 <category android:name="org.zpcat.madlist.sample_code" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="f3d1e72addd99777b33c091943c3460a7cca5b48" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
